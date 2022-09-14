@@ -21,13 +21,13 @@ const isValidEmail = function (value) {
 
 const isValidMobileNumber = function (value) {
     if ((/^(\+\d{1,3}[- ]?)?\d{10}$/.test(value))) {
-        return true;
+       return  true;
     }
 
 }
 
 const isValidData = function (value) {
-    const regex = (/^(?=.{1,50}$)[a-z]+(?:['_.\s][a-z]+)*$/);
+    const regex = (/^[a-zA-Z]+(([',. -][a-zA-Z])?[a-zA-Z]*)*$/)
     if (regex.test(value))
         return true
 }

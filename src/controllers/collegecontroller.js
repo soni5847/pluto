@@ -14,7 +14,7 @@ const createcollegedocument = async (req, res) => {
         if (!name) return res.status(400).send({ status: false, msg: "Name is required" })
         if (!fullName) return res.status(400).send({ status: false, msg: "fullName is required" })
         if (!logoLink) return res.status(400).send({ status: false, msg: "logoLink is required" })
-         
+
         if (!validation.isValid(name)) return res.status(400).send({ status: false, msg: "Invalid name" })
         if (!validation.isValid(fullName)) return res.status(400).send({ status: false, msg: "Invalid fullname" })
 
@@ -22,11 +22,9 @@ const createcollegedocument = async (req, res) => {
         if (!validation.isValidData(fullName)) return res.status(400).send({ status: false, msg: "Give suitable fullName ,Use only alphabets" })
 
         let findname = await collegemodel.find({ name: name })
-        if (findname.length !== 0) return res.status(400).send({ status: false, Message: "CollegeName is already exist" })
+        if (findname.length !== 0) return res.status(400).send({ status: false, Message: "Name is already exist" })
 
-   
-        //   Ta se puch na hai
-    //  if (!validation.isURL(logoLink)) return res.status(400).send({ status: false, msg: "Url not valid" })
+        if (!validation.isURL(logoLink)) return res.status(400).send({ status: false, msg: "Url not valid" })
 
 
 
@@ -45,19 +43,19 @@ const getcollegedetail = async (req, res) => {
     try {
         let { name } = req.query
 
-        let findnameindb = await collegemodel.findOne({ name: name })
+        let findnameindb = await collegemodel.findOne({$or :[{ name: name } ,{fullName : name}]})
         if (!findnameindb) return res.status(400).send({ status: true, Message: "College name is required" })
 
-        
+
         let findintern = await internmodel.find({ collegeId: findnameindb._id })
 
         findnameindb.interns = findintern
 
         let newobj = { name: findnameindb.name, fullName: findnameindb.fullName, logoLink: findnameindb.logoLink, interns: findintern }
 
-        res.status(201).send({ status: true, Data: newobj })
+        res.status(200).send({ status: true, Data: newobj })
     } catch (error) {
-        res.status(500).send({ status: false, Message: error.Message })
+        res.status(500).send({ status: false, Message: error.message })
     }
 }
 
