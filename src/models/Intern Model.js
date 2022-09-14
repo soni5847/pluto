@@ -24,7 +24,7 @@ const internschema = new mongoose.Schema({
         type: ObjectId,
         ref: "college",
     },
-    isDeleted: { type: boolean, default: false },
+    isDeleted: { type: Boolean, default: false },
 
     // createdAt: moment().format("DD-MM-YYYY  h:mm:ss a"),
     // updatedAt: moment().format("DD-MM-YYYY  h:mm:ss a")
