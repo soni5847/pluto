@@ -1,5 +1,6 @@
 const { default: mongoose } = require("mongoose")
 const ObjectId = mongoose.Schema.Types.ObjectId
+const moment = require("moment")
 
 
 const internschema = new mongoose.Schema({
@@ -26,8 +27,9 @@ const internschema = new mongoose.Schema({
     },
     isDeleted: { type: Boolean, default: false },
 
-    // createdAt: moment().format("DD-MM-YYYY  h:mm:ss a"),
-    // updatedAt: moment().format("DD-MM-YYYY  h:mm:ss a")
-})
 
-module.exports = mongoose.model("intern" ,internschema)
+},/*{ createdAt: moment().format("DD-MM-YYYY  h:mm:ss a"),
+    updatedAt: moment().format("DD-MM-YYYY  h:mm:ss a")}*/
+    {timestamps : true})
+
+module.exports = mongoose.model("intern", internschema)
