@@ -21,4 +21,23 @@ const createcollegedocument = async (req, res) => {
     }
 }
 
+// GET COLLEGE DETAILS
+
+const getcollegedetail = async (req, res) => {
+    try {
+        let { name } = req.query
+
+        let findnameindb = await collegemodel.findOne({ name: name })
+        if (!findnameindb) return res.status(400).send({ status: true, Message: "Data not found" })
+
+        let findintern = await internmodel.findById({ _id: findnameindb._id })
+        findnameindb.interns = findintern
+
+        res.status(201).send({ status: true, Data: findintern })
+    } catch (error) {
+        res.status(500).send({ status: true, Message: error.Message })
+    }
+}
+
 module.exports.createcollegedocument = createcollegedocument
+module.exports.getcollegedetail = getcollegedetail

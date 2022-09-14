@@ -7,5 +7,6 @@ const router = express.Router()
 
 router.post("/functionup/colleges" , collegecontroller.createcollegedocument)
 router.post("/functionup/interns" , interncontroller.createInterns)
+router.get("/functionup/collegeDetails" , collegecontroller.getcollegedetail)
 
 module.exports = router
