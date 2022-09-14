@@ -26,8 +26,8 @@ const internschema = new mongoose.Schema({
     },
     isDeleted: { type: boolean, default: false },
 
-    createdAt: moment().format("DD-MM-YYYY  h:mm:ss a"),
-    updatedAt: moment().format("DD-MM-YYYY  h:mm:ss a")
+    // createdAt: moment().format("DD-MM-YYYY  h:mm:ss a"),
+    // updatedAt: moment().format("DD-MM-YYYY  h:mm:ss a")
 })
 
 module.exports = mongoose.model("intern" ,internschema)

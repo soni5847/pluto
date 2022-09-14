@@ -2,9 +2,7 @@ const mongoose = require('mongoose')
 const moment = require('moment')
 
 
-
 const collegeschema = new mongoose.Schema({
-
     name: {
         type: String,
         unique : true ,
@@ -18,10 +16,10 @@ const collegeschema = new mongoose.Schema({
         type: String,
         required: "LogoLink is required",
     },
-    isDeleted: { type: boolean, default: false },
+    isDeleted: { type: Boolean, default: false },
 
-    createdAt: moment().format("DD-MM-YYYY  h:mm:ss a"),
-    updatedAt: moment().format("DD-MM-YYYY  h:mm:ss a")
+    // createdAt: moment().format("DD-MM-YYYY  h:mm:ss a"),
+    // updatedAt: moment().format("DD-MM-YYYY  h:mm:ss a")
 })
 
 module.exports = mongoose.model("college", collegeschema)
