@@ -5,7 +5,7 @@ const moment = require('moment')
 const collegeschema = new mongoose.Schema({
     name: {
         type: String,
-        unique : true ,
+        unique: true,
         required: "Name is required",
     },
     fullName: {
@@ -20,6 +20,6 @@ const collegeschema = new mongoose.Schema({
 
     // createdAt: moment().format("DD-MM-YYYY  h:mm:ss a"),
     // updatedAt: moment().format("DD-MM-YYYY  h:mm:ss a")
-})
+}, { timestamps: true })
 
 module.exports = mongoose.model("college", collegeschema)
