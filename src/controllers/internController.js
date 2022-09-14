@@ -5,11 +5,12 @@ const internModels = require("../models/Intern Model");
 const createInterns = async function (req, res) {
     try 
     {
-      const {name, email, mobile ,collegeId, collegeName, isDeleted} = req.body; // Destructing Key and Values.
-      const collegeNames = await collegeModels.find({fullName:collegeName})
-
+      let {name, email, mobile ,collegeId, collegeName, isDeleted} = req.body; // Destructing Key and Values.
+     
+      const collegeNames = await collegeModels.findOne({fullName:collegeName})
+         collegeId = collegeNames._id
       let data = { name, email, mobile, collegeId, collegeName, isDeleted }
-      data.collegeId = collegeName._id
+     
       const internData = await internModels.create(data);
       
       res.status(201).send({status: true, message:"Intern Created Successfully",data: internData})
