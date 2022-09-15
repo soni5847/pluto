@@ -26,10 +26,10 @@ const internschema = new mongoose.Schema({
         ref: "college",
     },
     isDeleted: { type: Boolean, default: false },
+    
+    createdAt: { type: String, default: moment().format("DD-MM-YYYY  h:mm:ss a") },
+    updatedAt: { type: String, default: moment().format("DD-MM-YYYY  h:mm:ss a") }
 
-
-},/*{ createdAt: moment().format("DD-MM-YYYY  h:mm:ss a"),
-    updatedAt: moment().format("DD-MM-YYYY  h:mm:ss a")}*/
-    {timestamps : true})
+})
 
 module.exports = mongoose.model("intern", internschema)

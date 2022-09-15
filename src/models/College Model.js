@@ -18,8 +18,8 @@ const collegeschema = new mongoose.Schema({
     },
     isDeleted: { type: Boolean, default: false },
 
-    // createdAt: moment().format("DD-MM-YYYY  h:mm:ss a"),
-    // updatedAt: moment().format("DD-MM-YYYY  h:mm:ss a")
-}, { timestamps: true })
+    createdAt: { type: String, default: moment().format("DD-MM-YYYY  h:mm:ss a") },
+    updatedAt: { type: String, default: moment().format("DD-MM-YYYY  h:mm:ss a") }
+},)
 
 module.exports = mongoose.model("college", collegeschema)

@@ -20,14 +20,11 @@ const createInterns = async function (req, res) {
     if (findnumber.length > 0) return res.status(400).send({ status: false, msg: "mobile no. is already exist" })
     if (findemail.length > 0) return res.status(400).send({ status: false, msg: "email id is already exist" })
 
-
-    if (!validation.isValid(name)) return res.status(400).send({ status: false, msg: "Invalid name" })
-
     //checking 
-    if (!name) return res.status(400).send({ status: false, msg: "Name is required" })
-    if (!email) return res.status(400).send({ status: false, msg: "email is required" })
-    if (!mobile) return res.status(400).send({ status: false, msg: "mobile is required " })
-    if (!collegeName) return res.status(400).send({ status: false, msg: "collegeName is required" })
+    if (!name) return res.status(400).send({ status: false, msg: "Name is mandatory" })
+    if (!email) return res.status(400).send({ status: false, msg: "email is mandatory" })
+    if (!mobile) return res.status(400).send({ status: false, msg: "mobile is mandatory " })
+    if (!collegeName) return res.status(400).send({ status: false, msg: "collegeName is mandatory" })
 
     const collegeNames = await collegeModels.findOne({$or: [ { fullName: collegeName }, {name: collegeName }] })
     if (!collegeNames) return res.status(404).send({ status: false, msg: "college name is invalid" })

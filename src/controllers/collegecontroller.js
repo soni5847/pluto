@@ -11,9 +11,9 @@ const createcollegedocument = async (req, res) => {
         let { name, fullName, logoLink, isDeleted } = req.body
 
         if (!validation.isValidReqBody(req.body)) return res.status(400).send({ Status: false, Message: "Please! Give deatils" })
-        if (!name) return res.status(400).send({ status: false, msg: "Name is required" })
-        if (!fullName) return res.status(400).send({ status: false, msg: "fullName is required" })
-        if (!logoLink) return res.status(400).send({ status: false, msg: "logoLink is required" })
+        if (!name) return res.status(400).send({ status: false, msg: "Name is mandatory" })
+        if (!fullName) return res.status(400).send({ status: false, msg: "fullName is mandatory" })
+        if (!logoLink) return res.status(400).send({ status: false, msg: "logoLink is mandatory" })
 
         if (!validation.isValid(name)) return res.status(400).send({ status: false, msg: "Invalid name" })
         if (!validation.isValid(fullName)) return res.status(400).send({ status: false, msg: "Invalid fullname" })
@@ -39,10 +39,12 @@ const createcollegedocument = async (req, res) => {
 
 const getcollegedetail = async (req, res) => {
     try {
-        let { name } = req.query
+        let { collegeName } = req.query
 
-        let findnameindb = await collegemodel.findOne({$or :[{ name: name } ,{fullName : name}]})
-        if (!findnameindb) return res.status(400).send({ status: true, Message: "College name is required" })
+        if (!validation.isValid(collegeName)) return res.status(400).send({ status: true, Message: "Please Enter College name" })
+
+        let findnameindb = await collegemodel.findOne({$or :[{ name: collegeName } ,{fullName : collegeName}]})
+        if (!findnameindb) return res.status(404).send({ status: true, Message: "College Name not found please enter valid name" })
 
 
         let findintern = await internmodel.find({ collegeId: findnameindb._id })
