@@ -26,8 +26,6 @@ const createcollegedocument = async (req, res) => {
 
         if (!validation.isURL(logoLink)) return res.status(400).send({ status: false, msg: "Url not valid" })
 
-
-
         const createdata = await collegemodel.create(req.body)
         res.status(201).send({ Status: true, Data: createdata })
 
@@ -49,9 +47,10 @@ const getcollegedetail = async (req, res) => {
 
         let findintern = await internmodel.find({ collegeId: findnameindb._id })
 
-        findnameindb.interns = findintern
+        if(findintern.length > 0)findnameindb.interns = findintern
+        if(findintern.length == 0)  findnameindb.interns = "Intern not Found"
 
-        let newobj = { name: findnameindb.name, fullName: findnameindb.fullName, logoLink: findnameindb.logoLink, interns: findintern }
+        let newobj = { name: findnameindb.name, fullName: findnameindb.fullName, logoLink: findnameindb.logoLink, interns: findnameindb.interns }
 
         res.status(200).send({ status: true, Data: newobj })
     } catch (error) {
