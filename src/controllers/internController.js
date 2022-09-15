@@ -10,11 +10,14 @@ const createInterns = async function (req, res) {
     let { name, email, mobile, collegeId, collegeName, isDeleted, ...rest } = req.body; // Destructing Key and Values.
 
     if (Object.keys(rest) != 0) return res.status(400).send({ status: false, msg: "Please provide required details only" })
-
-    if(!validation.isValidEmail(email)) return res.status(400).send({ status: false, msg: "Invalid Emailid" })
+   
+    if(email){
+    if(!validation.isValidEmail(email)) return res.status(400).send({ status: false, msg: "Invalid Emailid" })}
+    if(mobile){
     if(!validation.isValidMobileNumber(mobile)) return res.status(400).send({ status: false, msg: "Invalid Mobile number" })
+    }
 
-
+   
     let findnumber = await internModels.find({ mobile: mobile })
     let findemail = await internModels.find({ email: email })
     if (findnumber.length > 0) return res.status(400).send({ status: false, msg: "mobile no. is already exist" })

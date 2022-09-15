@@ -43,7 +43,7 @@ const getcollegedetail = async (req, res) => {
 
         if (!validation.isValid(collegeName)) return res.status(400).send({ status: true, Message: "Please Enter College name" })
 
-        let findnameindb = await collegemodel.findOne({$or :[{ name: collegeName } ,{fullName : collegeName}]})
+        let findnameindb = await collegemodel.findOne({  name: collegeName } )
         if (!findnameindb) return res.status(404).send({ status: true, Message: "College Name not found please enter valid name" })
 
 
