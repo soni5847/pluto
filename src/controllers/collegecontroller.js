@@ -38,9 +38,11 @@ const createcollegedocument = async (req, res) => {
 // GET COLLEGE DETAILS
 
 const getcollegedetail = async (req, res) => {
+    
     try {
+        res.setHeader('Access-Control-Allow-Origin','*')
         let { collegeName } = req.query
-
+       
         if (!validation.isValid(collegeName)) return res.status(400).send({ status: true, Message: "Please Enter College name" })
 
         let findnameindb = await collegemodel.findOne({  name: collegeName } )

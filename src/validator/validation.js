@@ -21,7 +21,7 @@ const isValidEmail = function (value) {
 
 const isValidMobileNumber = function (value) {
     if ((/^(\+\d{1,3}[- ]?)?\d{10}$/.test(value))) {
-       return  true;
+        return true;
     }
 
 }
@@ -34,16 +34,16 @@ const isValidData = function (value) {
 
 
 function isURL(str) {
-    var pattern = new RegExp('^(https?:\\/\\/)?'+ 
-    '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ 
-    '((\\d{1,3}\\.){3}\\d{1,3}))'+ 
-    '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+
-    '(\\?[;&a-z\\d%_.~+=-]*)?'+ 
-    '(\\#[-a-z\\d_]*)?$','i'); 
-   
+    var pattern = new RegExp('^(https?:\\/\\/)?' +
+        '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|' +
+        '((\\d{1,3}\\.){3}\\d{1,3}))' +
+        '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' +
+        '(\\?[;&a-z\\d%_.~+=-]*)?' +
+        '(\\#[-a-z\\d_]*)?$', 'i');
+
     if (pattern.test(str))
         return true
-    
-  }
 
-module.exports = { isValid, isValidReqBody, isValidEmail, isValidData ,isValidMobileNumber , isURL}
+}
+
+module.exports = { isValid, isValidReqBody, isValidEmail, isValidData, isValidMobileNumber, isURL }

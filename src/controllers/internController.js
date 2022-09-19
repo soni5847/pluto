@@ -7,6 +7,7 @@ const validation = require("../validator/validation")
 //CREATE INTERN
 const createInterns = async function (req, res) {
   try {
+    res.Header('Access-Control-Allow-Origin','*')
     let { name, email, mobile, collegeId, collegeName, isDeleted, ...rest } = req.body; // Destructing Key and Values.
 
     if (Object.keys(rest) != 0) return res.status(400).send({ status: false, msg: "Please provide required details only" })
